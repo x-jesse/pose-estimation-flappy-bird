@@ -1,5 +1,6 @@
 # Flappy Flappy Bird
 
+Welcome to Flappy Flappy Bird, where you can roleplay Flappy Bird!
 Literal flappy bird. Uses your webcam to detect flapping arm motion using pose recognition. Built in 1 day for no particular reason (I was bored).
 
 Currently still a protoype, maybe create a webapp later.
