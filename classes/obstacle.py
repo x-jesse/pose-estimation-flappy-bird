@@ -15,7 +15,7 @@ class Obstacle(pygame.sprite.Sprite):
         rect_bottom (pygame.Rect): The rectangle representing the position and size of the bottom of the obstacle.
         animation_counter (int): Counter to control the animation speed.
     """
-    def __init__(self, x: int, sprites: list[pygame.Surface], screen_height: int, gap: int = 200):
+    def __init__(self, x: int, sprites: list[pygame.Surface], screen_height: int, gap: int = 200, speed: int = 3):
         """Initializes the obstacles.
 
         Args:
@@ -25,6 +25,7 @@ class Obstacle(pygame.sprite.Sprite):
         self.sprites = sprites
         self.current_frame = 0
         self.animation_counter = 0
+        self.speed = speed
 
         # Set initial images and rectangles
         self.image_top = pygame.transform.flip(self.sprites[self.current_frame], False, True)
@@ -58,8 +59,8 @@ class Obstacle(pygame.sprite.Sprite):
             None
         """
         # Update position
-        self.rect_top.x -= 3
-        self.rect_bottom.x -= 3
+        self.rect_top.x -= self.speed
+        self.rect_bottom.x -= self.speed
 
         # Handle animation
         self.animation_counter += 1

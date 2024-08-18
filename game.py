@@ -1,12 +1,12 @@
 import pygame
 import cv2
+import random
 import mediapipe as mp
 from classes.player import Player
 from classes.obstacle import Obstacle
 from classes.button import Button
 
 class FlappyBirdGame:
-    # Initialize MediaPipe Pose
     mp_pose = mp.solutions.pose
     pose = mp_pose.Pose()
     mp_drawing = mp.solutions.drawing_utils
@@ -23,17 +23,22 @@ class FlappyBirdGame:
         self.invincible = invincible
         self.score = 0
 
-        for i in range(3):
-            pipe = Obstacle(x=SCREEN_WIDTH + i * PIPE_GAP, sprites=PIPE_SPRITES, screen_height=SCREEN_HEIGHT, gap=PIPE_GAP)
+        prev_pos = SCREEN_WIDTH
+        for i in range(4):
+            pos = SCREEN_WIDTH + i * 250
+            pipe = Obstacle(x=pos, sprites=PIPE_SPRITES, screen_height=SCREEN_HEIGHT, gap=PIPE_GAP, speed=GAME_SPEED)
             self.pipes.add(pipe)
+            prev_pos = pos
+        self.pipe_timer = random.randint(300, 360)
+        self.prev_pipe_pos = prev_pos
 
         # pose detection params
         self.prev_left_wrist_y = None
         self.prev_right_wrist_y = None
         self.flap_threshold = 20
 
-        self.font = pygame.font.SysFont(None, 36)
-        self.retry_button = Button(SCREEN_WIDTH // 2 - 50, SCREEN_HEIGHT // 2, 100, 50, "Retry", self.font, (255, 0, 0), (200, 0, 0))
+        self.font = pygame.font.Font("assets/ThaleahFat.ttf", 36)
+        self.retry_button = Button(SCREEN_WIDTH // 2 - 50, SCREEN_HEIGHT // 2, 100, 50, "Retry", self.font, (120, 0, 0), (177, 0, 0))
 
     def run(self):
         """
@@ -96,6 +101,8 @@ class FlappyBirdGame:
             self.bird.update()
             self.pipes.update()
 
+            self.pipe_timer -= 1
+
             if not self.invincible:
                 for pipe in self.pipes:
                     if pipe.collides_with(self.bird):
@@ -106,9 +113,14 @@ class FlappyBirdGame:
 
             if self.pipes.sprites()[0].off_screen():
                 self.pipes.remove(self.pipes.sprites()[0])
-                new_pipe = Obstacle(x=SCREEN_WIDTH + 200, sprites=PIPE_SPRITES, screen_height=SCREEN_HEIGHT, gap=PIPE_GAP)
-                self.pipes.add(new_pipe)
                 self.score += 1
+
+            # if self.pipe_timer <= 0:
+                pos = SCREEN_WIDTH + 250
+                new_pipe = Obstacle(x=pos, sprites=PIPE_SPRITES, screen_height=SCREEN_HEIGHT, gap=PIPE_GAP, speed=GAME_SPEED)
+                self.pipes.add(new_pipe)
+                self.pipe_timer = random.randint(60, 120)
+                self.prev_pipe_pos = pos
 
             self.draw()
             pygame.display.update()
@@ -134,8 +146,7 @@ class FlappyBirdGame:
         """
 
         """
-        font = pygame.font.SysFont(None, 36)
-        text = font.render(str(self.score), True, BLACK)
+        text = self.font.render(str(self.score), True, WHITE)
         self.screen.blit(text, (SCREEN_WIDTH // 2, 50))
 
     def show_game_over(self):
@@ -143,7 +154,6 @@ class FlappyBirdGame:
         
         """
         while True:
-            self.screen.fill(WHITE)
             self.draw_score()
             self.retry_button.draw(self.screen)
             pygame.display.update()
@@ -153,7 +163,7 @@ class FlappyBirdGame:
                     pygame.quit()
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     if self.retry_button.is_clicked():
-                        self.__init__(invincible=self.invincible)  # Reset the game
+                        self.__init__(invincible=self.invincible)
                         self.run()
 
 if __name__ == '__main__':
@@ -165,10 +175,10 @@ if __name__ == '__main__':
             pygame.image.load('assets/bird2.png'),
             pygame.image.load('assets/bird3.png')
         ]
-        BACKGROUND_IMAGE = pygame.image.load('assets/background.png')
+        SCREEN_WIDTH, SCREEN_HEIGHT = (1024, 548)
+        BACKGROUND_IMAGE = pygame.transform.scale(pygame.image.load('assets/background.png'), (SCREEN_WIDTH, SCREEN_HEIGHT))
         PIPE_SPRITES = [pygame.image.load('assets/pipe.png')]
-        BACKGROUND_SIZE = BACKGROUND_IMAGE.get_size()
-        SCREEN_WIDTH, SCREEN_HEIGHT = BACKGROUND_SIZE
+
     except pygame.error as e:
         print(f"Error loading images: {e}")
         pygame.quit()
@@ -179,10 +189,11 @@ if __name__ == '__main__':
     BLACK = (0, 0, 0)
 
     # Game settings
-    FPS = 30
-    GRAVITY = 0.25
-    BIRD_JUMP = -6.5
+    FPS = 60
+    GRAVITY = .4
+    BIRD_JUMP = -11
     PIPE_GAP = 200
+    GAME_SPEED = 6
 
-    FlappyBirdGame().run()
+    FlappyBirdGame(invincible=False).run()
     pygame.quit()

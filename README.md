@@ -5,6 +5,7 @@ Literal flappy bird. Uses your webcam to detect flapping arm motion using pose r
 Currently still a protoype, maybe create a webapp later.
 
 ### Changelog
+- Aug 17 Add docstrings and documentation
 - Aug 4 2024 Add changelog
 - Aug 3 2024 Initial commit
 
