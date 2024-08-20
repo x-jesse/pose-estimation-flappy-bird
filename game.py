@@ -58,8 +58,8 @@ class FlappyBirdGame:
             # Resize the image for faster processing
             frame = cv2.resize(frame, (320, 240))
             image_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            # uncomment this line if you want to overlay the pose markers on black frame instead of live camera
-            frame = np.zeros(frame.shape, dtype=np.uint8)
+
+            frame = np.zeros(frame.shape, dtype=np.uint8) # comment this line if you want to overlay the pose markers on live webcam feed instead of black frame
 
             # Process the image and detect the pose every 2 frames
             if self.clock.get_time() % 2 == 0:
