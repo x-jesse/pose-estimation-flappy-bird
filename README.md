@@ -9,7 +9,9 @@ https://github.com/user-attachments/assets/7b23e03b-f5a9-4e3f-aa84-a6fbda904167
 Literal flappy bird. Uses your webcam to detect flapping arm motion using pose estimation. Currently still a protoype, maybe create a webapp later.
 
 ## Usage
-Developed on Mac OS Sonoma (14.3.1) running Python version 3.11.4. If there's issues installing dependencies consider checking Python version or running on Linux.
+Developed on Mac OS Sonoma (14.3.1) running Python version 3.11.4. If there's issues installing dependencies consider checking Python version or running on Mac/Linux.
+
+**On Mac/Linux:**
 
 Setup virtualenv and install dependencies:
 ```
@@ -17,6 +19,20 @@ python -m venv ./venv
 . venv/bin/activate
 pip install -r requirements.txt
 ```
+Run the game:
+```
+python game.py
+```
+
+**On Windows:**
+
+Setup virtualenv and install dependencies:
+```
+python -m venv ./venv
+.\venv\Scripts\activate
+pip install -r requirements.txt
+```
+
 Run the game:
 ```
 python game.py
