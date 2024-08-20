@@ -29,7 +29,7 @@ class Player(pygame.sprite.Sprite):
         self.image = self.frames[self.current_frame]
         self.animation_counter = 0
 
-        # set pos
+        # Set position
         self.x = 50
         self.y = screen_height // 2
 
