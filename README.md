@@ -18,7 +18,7 @@ The flappy bird portion is very simple, it's a reimplementation of the standard 
 - We don't want to continuously trigger "flapping" when the player moves their arms down either though, so we'll set a minimum velocity that the player has to flap for us to consider it "flapping"
 - To make things easier, we'll assume that our minimum flapping velocity is fast enough that it's impossible for a person to trigger "flapping" multiple times with a single downwards arm movement
 
-
+![flappy_bird](https://github.com/user-attachments/assets/fbf43740-b781-47e5-8577-3b28a40f5992)
 
 ### Changelog
 - Aug 17 Add docstrings and documentation
