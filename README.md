@@ -25,8 +25,8 @@ The flappy bird portion is very simple, it's a reimplementation of the standard 
 ![flappy_bird](https://github.com/user-attachments/assets/fbf43740-b781-47e5-8577-3b28a40f5992)
 
 ### Changelog
-- Aug 19 Add documentation and demo vid to readme
-- Aug 17 Add docstrings and documentation
+- Aug 19 2024 Add documentation and demo vid to readme
+- Aug 17 2024 Add docstrings and documentation
 - Aug 4 2024 Add changelog
 - Aug 3 2024 Initial commit
 
