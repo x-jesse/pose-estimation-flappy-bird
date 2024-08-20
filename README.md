@@ -8,7 +8,21 @@ https://github.com/user-attachments/assets/7b23e03b-f5a9-4e3f-aa84-a6fbda904167
 
 Literal flappy bird. Uses your webcam to detect flapping arm motion using pose estimation. Built in 1 day for no particular reason (I was bored). Currently still a protoype, maybe create a webapp later.
 
-### Design
+## Usage
+Developed on Mac OS Sonoma (14.3.1) running Python version 3.11.4. If there's issues installing dependencies consider checking Python version or running on Linux.
+
+Setup virtualenv and install dependencies:
+```
+python -m venv ./venv
+. venv/bin/activate
+pip install -r requirements.txt
+```
+Run the game:
+```
+python game.py
+```
+
+## Design
 
 The flappy bird portion is very simple, it's a reimplementation of the standard flappy bird game in Python using the `pygame` library. For pose estimation, we'll use OpenCV to do the video processing and interface with the webcam, while the actual pose estimation is handled using Google's [MediaPipe](https://ai.google.dev/edge/mediapipe/solutions/guide) library. To control the bird in-game, we'll track the markers for the person's left and right wrist/forearm and each time we detect sufficient vertical motion, we'll consider it "flapping" and move the bird accordingly. 
 
@@ -30,16 +44,4 @@ The flappy bird portion is very simple, it's a reimplementation of the standard 
 - Aug 4 2024 Add changelog
 - Aug 3 2024 Initial commit
 
-## Usage
-Developed on Mac OS Sonoma (14.3.1) running Python version 3.11.4. If there's issues installing dependencies consider checking Python version or running on Linux.
 
-Setup virtualenv and install dependencies:
-```
-python -m venv ./venv
-. venv/bin/activate
-pip install -r requirements.txt
-```
-Run the game:
-```
-python game.py
-```
