@@ -44,8 +44,6 @@ class Player(pygame.sprite.Sprite):
 
         Args:
             screen (pygame.Surface): surface to draw to
-        
-        Returns: None
         """
         # rotate sprite based on vertical speed
         rotated_image = pygame.transform.rotate(self.image, -self.y_speed * 3)
@@ -53,12 +51,7 @@ class Player(pygame.sprite.Sprite):
         screen.blit(rotated_image, new_rect.topleft)
 
     def update(self) -> None:
-        """Updates player position and sprite.
-
-        Args: None
-
-        Returns: None
-        """
+        """Updates player position and sprite."""
         self.y_speed += self.gravity
         self.y += self.y_speed
         self.rect.y = self.y
@@ -70,10 +63,5 @@ class Player(pygame.sprite.Sprite):
             self.image = self.frames[self.current_frame]
 
     def jump(self) -> None:
-        """Updates player speed based on jump velocity.
-        
-        Args: None
-
-        Returns: None
-        """
+        """Updates player speed based on jump velocity."""
         self.y_speed = self.jump_speed

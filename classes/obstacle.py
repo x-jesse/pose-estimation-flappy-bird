@@ -42,23 +42,12 @@ class Obstacle(pygame.sprite.Sprite):
 
         Args:
             screen (pygame.Surface): The surface to draw the obstacle on.
-        
-        Returns: 
-            None
         """
         screen.blit(self.image_top, self.rect_top.topleft)
         screen.blit(self.image_bottom, self.rect_bottom.topleft)
 
     def update(self) -> None:
-        """Updates the obstacle's position and animation frame.
-
-        Args: 
-            None
-        
-        Returns: 
-            None
-        """
-        # Update position
+        """Updates the obstacle's position and animation frame."""
         self.rect_top.x -= self.speed
         self.rect_bottom.x -= self.speed
 

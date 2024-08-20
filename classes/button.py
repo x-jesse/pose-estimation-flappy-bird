@@ -14,7 +14,6 @@ class Button:
         color (tuple): The RGB color of the button in its normal state.
         hover_color (tuple): The RGB color of the button when hovered over.
     """
-
     def __init__(self, x, y, width, height, text, font, color, hover_color):
         """
         Initializes a Button instance with the given attributes.
@@ -35,7 +34,7 @@ class Button:
         self.color = color
         self.hover_color = hover_color
     
-    def draw(self, screen):
+    def draw(self, screen) -> None:
         """
         Draws the button on the screen, changing color when hovered over.
 
@@ -52,7 +51,7 @@ class Button:
         text_rect = text_surface.get_rect(center=self.rect.center)
         screen.blit(text_surface, text_rect)
 
-    def is_clicked(self):
+    def is_clicked(self) -> bool:
         """
         Checks if the button has been clicked.
 
