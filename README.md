@@ -12,7 +12,9 @@ Literal flappy bird. Uses your webcam to detect flapping arm motion using pose e
 
 The flappy bird portion is very simple, it's a reimplementation of the standard flappy bird game in Python using the `pygame` library. For pose estimation, we'll use OpenCV to do the video processing and interface with the webcam, while the actual pose estimation is handled using Google's [MediaPipe](https://ai.google.dev/edge/mediapipe/solutions/guide) library. To control the bird in-game, we'll track the markers for the person's left and right wrist/forearm and each time we detect sufficient vertical motion, we'll consider it "flapping" and move the bird accordingly. 
 
-<img width="574" alt="diagram" src="https://github.com/user-attachments/assets/a427498e-bbc5-41ca-b5a4-04d24c3da2ad">
+<p align="center">
+  <img width="400" alt="diagram" src="https://github.com/user-attachments/assets/a427498e-bbc5-41ca-b5a4-04d24c3da2ad">
+</p>
 
 **Additional Considerations:**
 
