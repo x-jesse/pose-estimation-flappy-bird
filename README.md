@@ -2,7 +2,7 @@
 
 ***Welcome to Flappy Flappy Bird, where you can roleplay Flappy Bird!***
 
-https://github.com/x-jesse/pose-estimation-flappy-bird/blob/main/demo.mp4
+/Users/xiajesse/Documents/code/why are we here/flappybirb/demo.mp4
 
 Literal flappy bird. Uses your webcam to detect flapping arm motion using pose estimation. Built in 1 day for no particular reason (I was bored). Currently still a protoype, maybe create a webapp later.
 
