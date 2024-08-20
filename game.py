@@ -2,6 +2,7 @@ import pygame
 import cv2
 import random
 import mediapipe as mp
+import numpy as np
 from classes.player import Player
 from classes.obstacle import Obstacle
 from classes.button import Button
@@ -49,14 +50,16 @@ class FlappyBirdGame:
         while running and cap.isOpened():
             self.clock.tick(FPS)
 
-            success, image = cap.read()
+            success, frame = cap.read()
             if not success:
                 print("Error reading video frame")
                 break
             
             # Resize the image for faster processing
-            image = cv2.resize(image, (320, 240))
-            image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+            frame = cv2.resize(frame, (320, 240))
+            image_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            # uncomment this line if you want to overlay the pose markers on black frame instead of live camera
+            frame = np.zeros(frame.shape, dtype=np.uint8)
 
             # Process the image and detect the pose every 2 frames
             if self.clock.get_time() % 2 == 0:
@@ -65,15 +68,15 @@ class FlappyBirdGame:
                 if results.pose_landmarks:
                     # Draw the pose landmarks on the original image
                     self.mp_drawing.draw_landmarks(
-                        image, results.pose_landmarks, self.mp_pose.POSE_CONNECTIONS)
+                        frame, results.pose_landmarks, self.mp_pose.POSE_CONNECTIONS)
 
                     # Get the positions of the left and right wrists
                     left_wrist = results.pose_landmarks.landmark[self.mp_pose.PoseLandmark.LEFT_WRIST]
                     right_wrist = results.pose_landmarks.landmark[self.mp_pose.PoseLandmark.RIGHT_WRIST]
 
                     # Convert normalized landmark positions to pixel positions
-                    left_wrist_y = left_wrist.y * image.shape[0]
-                    right_wrist_y = right_wrist.y * image.shape[0]
+                    left_wrist_y = left_wrist.y * frame.shape[0]
+                    right_wrist_y = right_wrist.y * frame.shape[0]
 
                     # Check for downward flapping motion
                     if self.prev_left_wrist_y is not None and self.prev_right_wrist_y is not None:
@@ -89,7 +92,7 @@ class FlappyBirdGame:
                     self.prev_right_wrist_y = right_wrist_y
 
             # Display the image with the pose landmarks
-            cv2.imshow('MediaPipe Pose', image)
+            cv2.imshow('MediaPipe Pose', frame)
             
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -110,6 +113,9 @@ class FlappyBirdGame:
 
                 if self.bird.y > SCREEN_HEIGHT or self.bird.y < 0:
                     running = False
+                
+            if self.invincible and self.bird.y > SCREEN_HEIGHT:
+                self.bird.y = SCREEN_HEIGHT
 
             if self.pipes.sprites()[0].off_screen():
                 self.pipes.remove(self.pipes.sprites()[0])
@@ -189,10 +195,10 @@ if __name__ == '__main__':
     BLACK = (0, 0, 0)
 
     # Game settings
-    FPS = 60
+    FPS = 45
     GRAVITY = .4
-    BIRD_JUMP = -11
-    PIPE_GAP = 200
+    BIRD_JUMP = -8
+    PIPE_GAP = 300
     GAME_SPEED = 6
 
     FlappyBirdGame(invincible=False).run()
