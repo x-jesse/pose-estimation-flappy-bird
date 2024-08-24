@@ -1,4 +1,4 @@
-# Pose-Estimation Flappy (Flappy) Bird 
+# Pose-Estimation Flappy (Flappy) Bird 🐦
 
 ***Welcome to Flappy Flappy Bird, where you can roleplay Flappy Bird!***
 
