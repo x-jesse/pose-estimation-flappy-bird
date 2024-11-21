@@ -1,7 +1,5 @@
 # Pose-Estimation Flappy (Flappy) Bird 🐦
 
-🔥 ***Welcome to Flappy Flappy Bird, where you can roleplay Flappy Bird!*** 🔥🪿
-
 >*Warning: flashing lights in demo video*
 
 https://github.com/user-attachments/assets/7b23e03b-f5a9-4e3f-aa84-a6fbda904167
